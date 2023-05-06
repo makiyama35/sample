@@ -35,6 +35,7 @@ services:
     # コンテナの作成に使用するDockerfileのパス
     build:
       dockerfile: "./container/db/Dockerfile"
+    # platform: linux/x86_64 #M1Macはこれを追加しないと動かない
     # ホスト側のポート:コンテナ側のポートを指定
     ports:
       - "3306:3306"
