@@ -2,4 +2,4 @@
 FROM mysql:8.0
 
 # 作成した設定ファイルをコンテナ内にコピー
-COPY ./container/db/my.conf /etc/my.conf
+COPY ./container/db/my.cnf /etc/my.cnf
