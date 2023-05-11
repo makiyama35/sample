@@ -1,21 +1,23 @@
 # docker-composeのバージョン
-version: "3" 
+version: "3.1"
 
 # コンテナ定義
 services:
   # webサーバー
   web:
     # コンテナ名
+    image: nginx:stable-alpine
     container_name: "web"
     # コンテナの作成に使用するDockerfileのパス
-    build:
-      dockerfile: "./container/web/Dockerfile"
+    #build:
+    #  dockerfile: "./container/web/Dockerfile"
     # ホスト側のポート:コンテナ側のポートを指定
     ports:
       - "8089:80"
     # src配下のファイルをコンテナ内の~/va/www/html配下に配置
     volumes:
-      - "./src:/var/www/html"
+      - "./html:/var/www/html"
+      - "./nginx_config/default.conf:/etc/nginx/conf.d/default.conf"
 
   # PHPサーバー
   php:
@@ -23,18 +25,20 @@ services:
     container_name: "php"
     # コンテナの作成に使用するDockerfileのパス
     build:
-      dockerfile: "./container/php/Dockerfile"
+      dockerfile: "docker_php"
     # srcディレクトリ内のファイルをコンテナ内の~/var/www/html配下にマウント
     volumes:
-      - "./src:/var/www/html"
-    
+      - "./html:/var/www/html"
+      - "./php_config/php.ini:/usr/local/etc/php/php.ini"
+
   # DBサーバー
   db:
     # コンテナ名
+    image: mysql:8.0
     container_name: "db"
     # コンテナの作成に使用するDockerfileのパス
-    build:
-      dockerfile: "./container/db/Dockerfile"
+    #build:
+    #  dockerfile: "./container/db/Dockerfile"
     # platform: linux/x86_64 #M1Macはこれを追加しないと動かない
     # ホスト側のポート:コンテナ側のポートを指定
     ports:
@@ -47,4 +51,5 @@ services:
       - MYSQL_PASSWORD=password
     # srcディレクトリ内のファイルをコンテナ内の~/var/www/html配下にマウント
     volumes:
-      - "./container/db/data:/var/lib/mysql"
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql_config/my.cnf:/etc/my.cnf"

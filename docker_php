@@ -2,7 +2,7 @@
 FROM php:fpm-buster
 
 # 作成した設定ファイルをコンテナ内にコピー
-COPY ./container/php/php.ini /usr/local/etc/php/php.ini
+# COPY ./container/php/php.ini /usr/local/etc/php/php.ini
 
 # パッケージのインストール
 RUN apt-get update \
