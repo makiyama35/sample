@@ -41,10 +41,10 @@ services:
       - "3306:3306"
     # 環境変数の指定
     environment:
-      - "MYSQL_ROOT_PASSWORD=*****"
-      - "MYSQL_DATABASE=*****"
-      - "MYSQL_USER=*****"
-      - "MYSQL_PASSWORD=*****"
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=password
     # srcディレクトリ内のファイルをコンテナ内の~/var/www/html配下にマウント
     volumes:
       - "./container/db/data:/var/lib/mysql"
