@@ -4,10 +4,11 @@ version: "3.1"
 # コンテナ定義
 services:
   # webサーバー
-  web:
+  nginx:
     # コンテナ名
+    container_name: nginx
+    #
     image: nginx:stable-alpine
-    container_name: web
     # コンテナの作成に使用するDockerfileのパス
     #build:
     #  dockerfile: "./container/web/Dockerfile"
@@ -34,10 +35,10 @@ services:
       - ./php_config/php.ini:/usr/local/etc/php/php.ini
 
   # DBサーバー
-  db:
+  mysql:
     # コンテナ名
+    container_name: mysql
     image: mysql:8.0
-    container_name: db
     # コンテナの作成に使用するDockerfileのパス
     #build:
     #  dockerfile: "./container/db/Dockerfile"
